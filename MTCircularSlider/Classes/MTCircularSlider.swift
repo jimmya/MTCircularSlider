@@ -155,6 +155,14 @@ open class MTCircularSlider: UIControl {
 			}
 		}
 	}
+	
+	public var thumbCenter: CGPoint {
+		var thumbCenter = viewCenter
+		let angle = rtlAwareAngle(thumbAngle)
+		thumbCenter.x += CGFloat(cos(angle)) * controlRadius
+		thumbCenter.y += CGFloat(sin(angle)) * controlRadius
+		return thumbCenter
+	}
 
 	fileprivate var isLeftToRight: Bool {
 		if #available(iOS 9.0, *) {
@@ -169,14 +177,6 @@ open class MTCircularSlider: UIControl {
 	
 	fileprivate var viewCenter: CGPoint {
 		return convert(center, from: superview)
-	}
-	
-	fileprivate var thumbCenter: CGPoint {
-		var thumbCenter = viewCenter
-		let angle = rtlAwareAngle(thumbAngle)
-		thumbCenter.x += CGFloat(cos(angle)) * controlRadius
-		thumbCenter.y += CGFloat(sin(angle)) * controlRadius
-		return thumbCenter
 	}
 	
 	fileprivate var controlRadius: CGFloat {
